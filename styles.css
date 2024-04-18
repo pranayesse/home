@@ -2,8 +2,23 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
     text-align: center;
-    margin-top: 20%;
+    margin: 0;
+    padding: 20px;
     color: #333;
+}
+
+header {
+    margin-top: 40px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
 }
 
 a {
@@ -43,14 +58,4 @@ a:hover {
     a {
         width: 80%;
     }
-}
-
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 20px;
 }
