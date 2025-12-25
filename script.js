@@ -1,3 +1,6 @@
-function displayEmail() {
-    alert('Reach me at: pranay.mokida@protonmail.com');
+function copyEmail() {
+  const email = "pranay.mokida@protonmail.com";
+  navigator.clipboard.writeText(email).then(() => {
+    alert("Email copied to clipboard.");
+  });
 }
