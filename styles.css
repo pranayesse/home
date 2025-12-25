@@ -1,5 +1,9 @@
-/* ---------- Stardew Valley Theme ---------- */
-/* Cozy • Warm • Pastoral • Calm */
+/* =====================================================
+   Stardew Valley Theme
+   Cozy • Calm • Pastoral • Minimal
+   ===================================================== */
+
+/* ---------- Colors ---------- */
 
 :root {
   --bg: #f6f1e7;          /* parchment */
@@ -11,9 +15,11 @@
   --hover-text: #ffffff;
 }
 
+/* ---------- Base ---------- */
+
 body {
   font-family: "Trebuchet MS", system-ui, sans-serif;
-  background-color: #f6f1e7;
+  background-color: var(--bg);
   background-image:
     radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
     radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
@@ -24,12 +30,39 @@ body {
   padding: 20px;
 }
 
+/* ---------- Ambient Stardew Animation (Pollen) ---------- */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25) 2px, transparent 3px),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.2) 2px, transparent 3px),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.18) 2px, transparent 3px);
+  background-size: 300px 300px;
+  animation: drift 60s linear infinite;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-300px);
+  }
+}
 
 /* ---------- Header ---------- */
 
 header {
   text-align: center;
   margin-top: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .profile-picture {
@@ -40,6 +73,18 @@ header {
   margin-bottom: 15px;
   border: 3px solid var(--border);
   background-color: #fff;
+
+  /* 🍃 Upgrade 2: Gentle sway */
+  animation: sway 10s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
 }
 
 h1 {
@@ -48,23 +93,24 @@ h1 {
   letter-spacing: 0.3px;
 }
 
-/* ---------- Welcome Text ---------- */
-
 .welcome {
   margin-top: 6px;
   font-size: 15px;
   color: var(--muted);
 }
 
-/* ---------- Content Sections ---------- */
+/* ---------- Sections ---------- */
 
 section {
   max-width: 640px;
   margin: 42px auto;
-  background: rgba(255, 255, 255, 0.55);
   padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.55);
   border-radius: 10px;
   border: 2px solid var(--border);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 1;
 }
 
 h2 {
@@ -83,7 +129,7 @@ ul {
   padding-left: 22px;
 }
 
-/* ---------- Links (Wooden Button Feel) ---------- */
+/* ---------- Links (Wooden Buttons) ---------- */
 
 .links a {
   display: block;
