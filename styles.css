@@ -110,7 +110,7 @@ footer {
 
 /* ---------- Dark Mode (Automatic) ---------- */
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --bg: #0e0e0e;
     --text: #e6e6e6;
