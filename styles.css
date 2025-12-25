@@ -244,3 +244,38 @@ footer {
   opacity: 0.7;
 }
 
+/* ---------- Typography Tuning ---------- */
+
+h1 {
+  margin-bottom: 6px;
+  font-size: 28px;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 19px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.75;
+  font-size: 16px;
+  max-width: 60ch;
+}
+
+li {
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.welcome {
+  margin-top: 6px;
+  font-size: 14.5px;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+}
+
