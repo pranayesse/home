@@ -3,7 +3,7 @@
    Cozy • Calm • Pastoral • Minimal
    ===================================================== */
 
-/* ---------- Colors ---------- */
+/* ---------- Base Variables (Spring Default) ---------- */
 
 :root {
   --bg: #f6f1e7;          /* parchment */
@@ -15,7 +15,16 @@
   --hover-text: #ffffff;
 }
 
-/* ---------- Base ---------- */
+/* ---------- Fall Season Override ---------- */
+/* Activate by adding: <body data-season="fall"> */
+
+body[data-season="fall"] {
+  --bg: #f3eadc;          /* warmer paper */
+  --border: #7a4a28;      /* darker wood */
+  --accent: #9c5a2e;      /* autumn leaf */
+}
+
+/* ---------- Base Layout ---------- */
 
 body {
   font-family: "Trebuchet MS", system-ui, sans-serif;
@@ -43,17 +52,35 @@ body::before {
     radial-gradient(circle at 50% 80%, rgba(255,255,255,0.18) 2px, transparent 3px);
   background-size: 300px 300px;
   animation: drift 60s linear infinite;
-  opacity: 0.4;
+  opacity: 0.35;
   z-index: 0;
 }
 
 @keyframes drift {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-300px);
-  }
+  from { transform: translateY(0); }
+  to   { transform: translateY(-300px); }
+}
+
+/* ---------- Night Fireflies ---------- */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,230,150,0.9) 2px, transparent 3px),
+    radial-gradient(circle, rgba(255,230,150,0.7) 2px, transparent 3px),
+    radial-gradient(circle, rgba(255,230,150,0.6) 2px, transparent 3px);
+  background-size: 450px 450px;
+  animation: fireflies 90s linear infinite;
+  opacity: 0.18;
+  z-index: 0;
+}
+
+@keyframes fireflies {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-500px); }
 }
 
 /* ---------- Header ---------- */
@@ -72,19 +99,15 @@ header {
   object-fit: cover;
   margin-bottom: 15px;
   border: 3px solid var(--border);
-  background-color: #fff;
+  background-color: #ffffff;
 
-  /* 🍃 Upgrade 2: Gentle sway */
+  /* Gentle Stardew sway */
   animation: sway 10s ease-in-out infinite;
 }
 
 @keyframes sway {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(1deg);
-  }
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(1deg); }
 }
 
 h1 {
@@ -105,7 +128,7 @@ section {
   max-width: 640px;
   margin: 42px auto;
   padding: 22px 24px;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255,255,255,0.55);
   border-radius: 10px;
   border: 2px solid var(--border);
   box-shadow: 0 4px 10px rgba(0,0,0,0.06);
