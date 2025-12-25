@@ -1,21 +1,25 @@
-/* ---------- Base (Light Mode) ---------- */
+/* ---------- Stardew Valley Theme ---------- */
+/* Cozy • Warm • Pastoral • Calm */
 
 :root {
-  --bg: #ffffff;
-  --text: #222222;
-  --muted: #666666;
-  --border: #222222;
-  --hover-bg: #222222;
+  --bg: #f6f1e7;          /* parchment */
+  --text: #3a2f1b;        /* dark brown */
+  --muted: #7a6a4f;       /* soft earth */
+  --border: #8b6f3d;      /* wood */
+  --accent: #4f7f52;      /* valley green */
+  --hover-bg: #4f7f52;
   --hover-text: #ffffff;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Trebuchet MS", system-ui, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   margin: 0;
   padding: 20px;
 }
+
+/* ---------- Header ---------- */
 
 header {
   text-align: center;
@@ -28,75 +32,92 @@ header {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 15px;
+  border: 3px solid var(--border);
+  background-color: #fff;
 }
 
 h1 {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  font-size: 28px;
+  letter-spacing: 0.3px;
 }
 
-.subtitle {
-  color: var(--muted);
+/* ---------- Welcome Text ---------- */
+
+.welcome {
+  margin-top: 6px;
   font-size: 15px;
+  color: var(--muted);
 }
+
+/* ---------- Content Sections ---------- */
 
 section {
   max-width: 640px;
-  margin: 40px auto;
+  margin: 42px auto;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 22px 24px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
 }
 
 h2 {
   font-size: 20px;
   margin-bottom: 10px;
+  color: var(--accent);
 }
 
-p, li {
-  line-height: 1.6;
+p,
+li {
+  line-height: 1.7;
   font-size: 16px;
 }
 
 ul {
-  padding-left: 20px;
+  padding-left: 22px;
 }
+
+/* ---------- Links (Wooden Button Feel) ---------- */
 
 .links a {
   display: block;
-  margin: 10px 0;
+  margin: 12px 0;
   padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
   text-decoration: none;
   color: var(--text);
+  background: #fffaf0;
   transition: all 0.2s ease;
 }
 
 .links a:hover {
   background-color: var(--hover-bg);
   color: var(--hover-text);
+  transform: translateY(-1px);
 }
+
+/* ---------- Contact ---------- */
 
 .contact {
   text-align: center;
 }
 
 .contact-button {
-  background-color: var(--border);
-  color: var(--hover-text);
-  border: none;
+  background-color: var(--accent);
+  color: #ffffff;
+  border: 2px solid var(--border);
   padding: 10px 18px;
   font-size: 15px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
 .contact-button:hover {
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
-.hint {
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 8px;
-}
+/* ---------- Footer ---------- */
 
 footer {
   text-align: center;
@@ -108,33 +129,14 @@ footer {
   color: var(--muted);
 }
 
-/* ---------- Dark Mode (Automatic) ---------- */
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #0e0e0e;
-    --text: #e6e6e6;
-    --muted: #9a9a9a;
-    --border: #e6e6e6;
-    --hover-bg: #e6e6e6;
-    --hover-text: #0e0e0e;
-  }
-
-  .profile-picture {
-    border: 1px solid #333;
-  }
-}
-
 /* ---------- Mobile ---------- */
 
 @media (max-width: 600px) {
   body {
     padding: 15px;
   }
-}
 
-.welcome {
-  margin-top: 6px;
-  font-size: 15px;
-  color: var(--muted);
+  section {
+    padding: 18px;
+  }
 }
