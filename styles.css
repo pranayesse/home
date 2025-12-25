@@ -215,3 +215,32 @@ footer {
     padding: 18px;
   }
 }
+
+/* =====================================================
+   Stardew Valley Pixel Divider
+   ===================================================== */
+
+.pixel-divider {
+  width: 120px;
+  height: 6px;
+  margin: 36px auto;
+  background:
+    linear-gradient(
+      to right,
+      var(--border) 0%,
+      var(--border) 20%,
+      transparent 20%,
+      transparent 30%,
+      var(--border) 30%,
+      var(--border) 50%,
+      transparent 50%,
+      transparent 60%,
+      var(--border) 60%,
+      var(--border) 80%,
+      transparent 80%,
+      transparent 100%
+    );
+  image-rendering: pixelated;
+  opacity: 0.7;
+}
+
