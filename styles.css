@@ -25,6 +25,9 @@ body[data-season="fall"] {
 }
 
 /* ---------- Base Layout ---------- */
+header {
+  text-align: center;
+}
 
 body {
   font-family: "Trebuchet MS", system-ui, sans-serif;
