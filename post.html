@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Blog Post · Pranay Mokida</title>
+  <meta name="description" id="page-desc" content="A cybersecurity article by Pranay Mokida.">
+  <meta name="author" content="Pranay Mokida">
+  <meta property="og:type" content="article">
+  <meta property="og:title" id="og-title" content="Blog Post · Pranay Mokida">
+  <meta property="og:description" id="og-desc" content="">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- marked.js for markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡</text></svg>">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span>&gt;</span> PM_</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle">⬤ Dark</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Post Hero -->
+<div class="post-hero">
+  <div class="container">
+    <a href="blog.html" style="font-family:var(--mono);font-size:0.78rem;color:var(--muted);display:inline-flex;align-items:center;gap:0.3rem;margin-bottom:1rem;">← Back to Security Log</a>
+    <div class="blog-cat" id="post-category" style="display:inline-block;margin-bottom:0.75rem;font-family:var(--mono);font-size:0.72rem;background:var(--accent-glow);color:var(--accent);padding:0.2rem 0.6rem;border-radius:4px;"></div>
+    <h1 id="post-title" class="section-title">Loading...</h1>
+    <div class="post-meta" id="post-meta"></div>
+  </div>
+</div>
+
+<!-- Post Body -->
+<article class="post-body" id="post-body">
+  <div style="color:var(--muted);font-family:var(--mono);font-size:0.85rem;text-align:center;padding:3rem 0;">
+    Loading article...
+  </div>
+</article>
+
+<!-- Post Navigation -->
+<div class="container" style="padding-bottom:4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:740px;">
+  <a id="prev-post" href="blog.html" class="btn btn-outline" style="font-size:0.78rem;">← Previous</a>
+  <a href="blog.html" class="btn btn-outline" style="font-size:0.78rem;">All Posts</a>
+  <a id="next-post" href="blog.html" class="btn btn-outline" style="font-size:0.78rem;">Next →</a>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-copy">© 2025 Pranay Mokida · <span class="mono" style="color:var(--accent);">security.analyst</span></div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<button class="terminal-fab" id="terminal-fab" title="Open terminal">⌨</button>
+<div class="terminal-window" id="terminal-window">
+  <div class="term-bar">
+    <div class="term-dot term-dot-r"></div><div class="term-dot term-dot-y"></div><div class="term-dot term-dot-g"></div>
+    <span class="term-title">pranay@pm-terminal ~ bash</span>
+  </div>
+  <div class="terminal-output" id="term-output"></div>
+  <div class="terminal-input-wrap">
+    <span class="term-prompt">pranay@pm ~ $</span>
+    <input type="text" class="terminal-input" id="term-input" placeholder="type a command..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+<div class="achievement-toast" id="achievement-toast">
+  <div class="achievement-icon">🏆</div>
+  <div class="achievement-text">
+    <div class="achievement-label">Achievement Unlocked</div>
+    <div class="achievement-name"></div>
+  </div>
+</div>
+
+<script src="blog-data.js"></script>
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+
+  if (!slug || typeof BLOG_POSTS === 'undefined') {
+    document.getElementById('post-title').textContent = 'Post not found';
+    document.getElementById('post-body').innerHTML = '<p>The requested post could not be found. <a href="blog.html">Return to blog</a>.</p>';
+    return;
+  }
+
+  const idx = BLOG_POSTS.findIndex(p => p.slug === slug);
+  const post = BLOG_POSTS[idx];
+
+  if (!post) {
+    document.getElementById('post-title').textContent = 'Post not found';
+    document.getElementById('post-body').innerHTML = '<p>The requested post could not be found. <a href="blog.html">Return to blog</a>.</p>';
+    return;
+  }
+
+  // Update metadata
+  document.getElementById('page-title').textContent = post.title + ' · Pranay Mokida';
+  document.getElementById('page-desc').setAttribute('content', post.excerpt);
+  document.getElementById('og-title').setAttribute('content', post.title);
+  document.getElementById('og-desc').setAttribute('content', post.excerpt);
+  document.getElementById('post-title').textContent = post.title;
+  document.getElementById('post-category').textContent = post.category;
+  document.getElementById('post-meta').innerHTML = `
+    <span>${post.date}</span>
+    <span>${post.readTime}</span>
+    ${post.tags ? post.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
+  `;
+
+  // Prev / Next navigation
+  const prevEl = document.getElementById('prev-post');
+  const nextEl = document.getElementById('next-post');
+  if (idx > 0) {
+    prevEl.href = 'post.html?slug=' + BLOG_POSTS[idx - 1].slug;
+    prevEl.textContent = '← ' + BLOG_POSTS[idx - 1].title.substring(0, 30) + '...';
+  } else {
+    prevEl.style.visibility = 'hidden';
+  }
+  if (idx < BLOG_POSTS.length - 1) {
+    nextEl.href = 'post.html?slug=' + BLOG_POSTS[idx + 1].slug;
+    nextEl.textContent = BLOG_POSTS[idx + 1].title.substring(0, 30) + '... →';
+  } else {
+    nextEl.style.visibility = 'hidden';
+  }
+
+  // Fetch and render markdown
+  fetch('posts/' + slug + '.md')
+    .then(r => {
+      if (!r.ok) throw new Error('not found');
+      return r.text();
+    })
+    .then(md => {
+      document.getElementById('post-body').innerHTML = marked.parse(md);
+    })
+    .catch(() => {
+      document.getElementById('post-body').innerHTML = `
+        <p style="color:var(--muted);">
+          Post content not found. Make sure <code>posts/${slug}.md</code> exists.
+        </p>
+      `;
+    });
+})();
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

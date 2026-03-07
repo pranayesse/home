@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Log · Pranay Mokida</title>
+  <meta name="description" content="Pranay Mokida's cybersecurity blog — threat analysis, incident response write-ups, and security research.">
+  <meta name="author" content="Pranay Mokida">
+  <link rel="canonical" href="https://pranaymokida.xyz/blog.html">
+  <meta property="og:title" content="Security Log · Pranay Mokida">
+  <meta property="og:description" content="Threat analysis, incident response write-ups, and security perspectives from Pranay Mokida.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡</text></svg>">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span>&gt;</span> PM_</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle">⬤ Dark</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Blog Hero -->
+<div class="blog-page-hero">
+  <div class="container">
+    <p class="section-label">Security Log</p>
+    <h1 class="section-title">From the Analyst's Desk</h1>
+    <p class="section-subtitle">Threat analysis, incident post-mortems, tool reviews, and security perspectives. Written by a practitioner, for practitioners.</p>
+  </div>
+</div>
+
+<!-- Blog Content -->
+<div class="blog-page-grid">
+  <div class="container">
+    <!-- Filters -->
+    <div class="blog-filters" id="blog-filters">
+      <button class="filter-btn active" data-cat="all">All Posts</button>
+      <button class="filter-btn" data-cat="threat-analysis">Threat Analysis</button>
+      <button class="filter-btn" data-cat="incident-response">Incident Response</button>
+      <button class="filter-btn" data-cat="tools">Tools & Reviews</button>
+      <button class="filter-btn" data-cat="grc">GRC & Compliance</button>
+      <button class="filter-btn" data-cat="ctf">CTF Write-ups</button>
+    </div>
+
+    <!-- Blog Grid (populated by JS) -->
+    <div class="blog-grid" id="blog-grid">
+      <div class="blog-empty">Loading posts...</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-copy">© 2025 Pranay Mokida · <span class="mono" style="color:var(--accent);">security.analyst</span></div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html">Resume</a>
+    </nav>
+  </div>
+</footer>
+
+<button class="terminal-fab" id="terminal-fab" title="Open terminal">⌨</button>
+
+<div class="terminal-window" id="terminal-window">
+  <div class="term-bar">
+    <div class="term-dot term-dot-r"></div>
+    <div class="term-dot term-dot-y"></div>
+    <div class="term-dot term-dot-g"></div>
+    <span class="term-title">pranay@pm-terminal ~ bash</span>
+  </div>
+  <div class="terminal-output" id="term-output"></div>
+  <div class="terminal-input-wrap">
+    <span class="term-prompt">pranay@pm ~ $</span>
+    <input type="text" class="terminal-input" id="term-input" placeholder="type a command..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+
+<div class="achievement-toast" id="achievement-toast">
+  <div class="achievement-icon">🏆</div>
+  <div class="achievement-text">
+    <div class="achievement-label">Achievement Unlocked</div>
+    <div class="achievement-name"></div>
+  </div>
+</div>
+
+<script src="blog-data.js"></script>
+<script>
+(function() {
+  const grid = document.getElementById('blog-grid');
+  if (!grid || typeof BLOG_POSTS === 'undefined') return;
+
+  function render(posts) {
+    if (posts.length === 0) {
+      grid.innerHTML = '<div class="blog-empty">No posts in this category yet. Check back soon!</div>';
+      return;
+    }
+    grid.innerHTML = posts.map(p => `
+      <div class="blog-card-wrap" data-cat="${p.category}">
+        <a href="post.html?slug=${p.slug}" class="blog-card">
+          <div class="blog-card-meta">
+            <span class="blog-cat">${p.category}</span>
+            <span>${p.date}</span>
+            <span>${p.readTime}</span>
+          </div>
+          <div class="blog-card-title">${p.title}</div>
+          <div class="blog-card-excerpt">${p.excerpt}</div>
+          <div class="blog-card-footer">
+            <span>${p.tags ? p.tags.slice(0,3).join(' · ') : ''}</span>
+            <span class="blog-read-more">Read →</span>
+          </div>
+        </a>
+      </div>
+    `).join('');
+  }
+
+  render(BLOG_POSTS);
+
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      if (cat === 'all') { render(BLOG_POSTS); }
+      else { render(BLOG_POSTS.filter(p => p.category === cat)); }
+    });
+  });
+})();
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>
