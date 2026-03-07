@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Links · Pranay Mokida</title>
+  <meta name="description" content="Pranay Mokida's personal corner — books, games, films, privacy tools, and things that make up who I am beyond the SOC.">
+  <meta name="author" content="Pranay Mokida">
+  <link rel="canonical" href="https://pranaymokida.xyz/links.html">
+  <meta property="og:title" content="Personal Links · Pranay Mokida">
+  <meta property="og:description" content="Books I've read, games I've played, films I've logged, and the tools I trust. The human behind the terminal.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡</text></svg>">
+  <style>
+    /* ── Page-specific styles ── */
+    .links-hero {
+      padding: 8rem 0 3.5rem;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .links-hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .avatar-img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      display: block;
+    }
+
+    .avatar-status {
+      position: absolute;
+      bottom: 4px; right: 4px;
+      width: 18px; height: 18px;
+      background: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+
+    .hero-handle {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-name { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 0.5rem; }
+
+    .hero-bio {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .interests-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+
+    .interest-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .interest-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Main grid ── */
+    .links-body { padding: 4rem 0 5rem; }
+
+    .links-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .links-columns { grid-template-columns: 1fr; }
+    }
+
+    /* ── Section card ── */
+    .link-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .link-section:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .ls-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ls-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .ls-title-wrap {}
+    .ls-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      display: block;
+    }
+
+    .ls-subtitle {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .ls-body { padding: 1.25rem 1.5rem; }
+
+    .ls-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.1rem;
+    }
+
+    .ls-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.77rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .ls-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+      transform: translateX(3px);
+    }
+
+    .ls-link-arrow { color: var(--muted); font-size: 0.8rem; }
+    .ls-link:hover .ls-link-arrow { color: var(--accent); }
+
+    /* ── Now reading / playing / watching strip ── */
+    .currently-strip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .currently-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    .currently-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .currently-val {
+      font-size: 0.82rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── Privacy resource full-width ── */
+    .privacy-card {
+      grid-column: 1 / -1;
+    }
+
+    .privacy-inner {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .privacy-text { flex: 1; min-width: 200px; }
+
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Reddit section ── */
+    .reddit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* ── Interests detail section ── */
+    .interests-section {
+      margin-top: 2.5rem;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .interest-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: all 0.25s;
+    }
+
+    .interest-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .interest-card-icon { font-size: 1.6rem; line-height: 1; }
+
+    .interest-card-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .interest-card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Colors per section ── */
+    .icon-books    { background: rgba(234,179,8,0.12); }
+    .icon-games    { background: rgba(99,102,241,0.12); }
+    .icon-movies   { background: rgba(239,68,68,0.12); }
+    .icon-privacy  { background: rgba(16,185,129,0.12); }
+    .icon-reddit   { background: rgba(255,69,0,0.12); }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span>&gt;</span> PM_</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="links.html" class="active">Links</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle">⬤ Dark</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<div class="links-hero">
+  <div class="container">
+    <div class="links-hero-inner">
+      <div class="avatar-wrap reveal">
+        <img
+          src="Pranay Mokida_files/illustration.png"
+          alt="Pranay Mokida"
+          class="avatar-img"
+        >
+        <span class="avatar-status">🟢</span>
+      </div>
+      <div class="reveal">
+        <p class="hero-handle mono">@pranaymokida</p>
+        <h1 class="hero-name">Beyond the Firewall</h1>
+        <p class="hero-bio">
+          Security analyst by day, curious human always. I read a lot — books on consciousness, the human body, and whatever rabbit hole Reddit pulls me into. I walk to think, game to decompress, and log almost everything I consume.
+        </p>
+        <div class="interests-row">
+          <span class="interest-chip">📚 Avid Reader</span>
+          <span class="interest-chip">🎮 Gamer</span>
+          <span class="interest-chip">🎬 Film Tracker</span>
+          <span class="interest-chip">🧠 Consciousness Nerd</span>
+          <span class="interest-chip">🚶 Walker</span>
+          <span class="interest-chip">🔒 Privacy Advocate</span>
+          <span class="interest-chip">👾 Reddit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MAIN CONTENT ========== -->
+<div class="links-body">
+  <div class="container">
+
+    <div class="links-columns">
+
+      <!-- ── Books ── -->
+      <div class="link-section reveal">
+        <div class="ls-header">
+          <div class="ls-icon icon-books">📚</div>
+          <div class="ls-title-wrap">
+            <span class="ls-title">Reading Log</span>
+            <span class="ls-subtitle">tracked on Goodreads</span>
+          </div>
+        </div>
+        <div class="ls-body">
+          <div class="currently-strip">
+            <div class="currently-dot"></div>
+            <div>
+              <div class="currently-label">Currently Reading</div>
+              <div class="currently-val">Check my shelf for latest →</div>
+            </div>
+          </div>
+          <p class="ls-desc">
+            I read across a wide range — consciousness, neuroscience, human biology, tech, fiction. If it makes me think differently about how reality works, I'm in. Books I return to often tend to be about the mind and what it means to be human.
+          </p>
+          <a href="https://www.goodreads.com/user/show/169962990-pranay-mokida" target="_blank" rel="noopener" class="ls-link">
+            <span>📖 goodreads.com/pranay-mokida</span>
+            <span class="ls-link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Gaming ── -->
+      <div class="link-section reveal">
+        <div class="ls-header">
+          <div class="ls-icon icon-games">🎮</div>
+          <div class="ls-title-wrap">
+            <span class="ls-title">Gaming Log</span>
+            <span class="ls-subtitle">tracked on Exophase</span>
+          </div>
+        </div>
+        <div class="ls-body">
+          <div class="currently-strip">
+            <div class="currently-dot"></div>
+            <div>
+              <div class="currently-label">Currently Playing</div>
+              <div class="currently-val">See live activity →</div>
+            </div>
+          </div>
+          <p class="ls-desc">
+            Gaming is how I decompress. I keep a full log of everything I've played — completions, achievements, time spent. It's the obsessive tracker in me. Also doubles as a great argument for why gaming is time well spent.
+          </p>
+          <a href="https://www.exophase.com/user/pranaymokida/" target="_blank" rel="noopener" class="ls-link">
+            <span>🕹 exophase.com/pranaymokida</span>
+            <span class="ls-link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Movies ── -->
+      <div class="link-section reveal">
+        <div class="ls-header">
+          <div class="ls-icon icon-movies">🎬</div>
+          <div class="ls-title-wrap">
+            <span class="ls-title">Movie Log</span>
+            <span class="ls-subtitle">tracked on iCheckMovies</span>
+          </div>
+        </div>
+        <div class="ls-body">
+          <div class="currently-strip">
+            <div class="currently-dot"></div>
+            <div>
+              <div class="currently-label">Recently Watched</div>
+              <div class="currently-val">See full watchlist →</div>
+            </div>
+          </div>
+          <p class="ls-desc">
+            I've been logging films I watch for a while now. iCheckMovies lets me track against lists — top films of all time, by genre, director, era. It scratches the completionist itch while actually making me watch good cinema.
+          </p>
+          <a href="https://www.icheckmovies.com/profiles/pranay+mokida/" target="_blank" rel="noopener" class="ls-link">
+            <span>🎞 icheckmovies.com/pranay-mokida</span>
+            <span class="ls-link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Reddit ── -->
+      <div class="link-section reveal">
+        <div class="ls-header">
+          <div class="ls-icon icon-reddit">👾</div>
+          <div class="ls-title-wrap">
+            <span class="ls-title">Reddit Rabbit Holes</span>
+            <span class="ls-subtitle">communities I inhabit</span>
+          </div>
+        </div>
+        <div class="ls-body">
+          <p class="ls-desc">
+            Reddit is my primary source of new ideas, niche knowledge, and endless distraction. My feed is a mix of security research, consciousness science, philosophy, fitness, and whatever the algorithm thinks I need to see at 2am.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <a href="https://www.reddit.com/r/netsec/" target="_blank" rel="noopener" class="ls-link">
+              <span>r/netsec – network security</span>
+              <span class="ls-link-arrow">↗</span>
+            </a>
+            <a href="https://www.reddit.com/r/consciousness/" target="_blank" rel="noopener" class="ls-link">
+              <span>r/consciousness</span>
+              <span class="ls-link-arrow">↗</span>
+            </a>
+            <a href="https://www.reddit.com/r/HumanBiology/" target="_blank" rel="noopener" class="ls-link">
+              <span>r/HumanBiology</span>
+              <span class="ls-link-arrow">↗</span>
+            </a>
+            <a href="https://www.reddit.com/r/cybersecurity/" target="_blank" rel="noopener" class="ls-link">
+              <span>r/cybersecurity</span>
+              <span class="ls-link-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Privacy Tools (full width) ── -->
+      <div class="link-section privacy-card reveal">
+        <div class="ls-header">
+          <div class="ls-icon icon-privacy">🔒</div>
+          <div class="ls-title-wrap">
+            <span class="ls-title">Recommended Privacy Resource</span>
+            <span class="ls-subtitle">for anyone who cares about their digital footprint</span>
+          </div>
+        </div>
+        <div class="ls-body">
+          <div class="privacy-inner">
+            <div class="privacy-text">
+              <div class="privacy-badge">⬤ STAFF PICK</div>
+              <p class="ls-desc" style="margin-bottom:0.75rem;">
+                Working in cybersecurity means you quickly realise how much data you're bleeding without knowing it. <strong>privacytools.io</strong> is the best starting point I've found — practical, no-nonsense tools and guides for locking down your digital life. VPNs, password managers, encrypted email, browser configs. I send this to everyone who asks me how to stay safe online.
+              </p>
+              <p class="ls-desc" style="margin-bottom:1.1rem;">
+                Start with the email and browser recommendations if you're new to privacy. If you're already using a password manager and 2FA everywhere, dig into the DNS and OS hardening sections.
+              </p>
+              <a href="https://www.privacytools.io/" target="_blank" rel="noopener" class="ls-link" style="max-width:340px;">
+                <span>🔐 privacytools.io</span>
+                <span class="ls-link-arrow">↗</span>
+              </a>
+            </div>
+            <div style="flex-shrink:0;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;min-width:200px;max-width:240px;font-family:var(--mono);font-size:0.75rem;color:var(--muted);line-height:2;">
+              <div style="color:var(--accent);margin-bottom:0.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;">Quick wins</div>
+              <div>✓ Password manager</div>
+              <div>✓ Encrypted email</div>
+              <div>✓ 2FA everywhere</div>
+              <div>✓ DNS over HTTPS</div>
+              <div>✓ Firefox + uBlock</div>
+              <div>✓ Signal for messages</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Interests in depth ── -->
+    <div class="interests-section">
+      <p class="section-label reveal">What Makes Me Tick</p>
+      <h2 class="section-title reveal">Off-Duty Interests</h2>
+      <div class="interests-grid">
+
+        <div class="interest-card reveal">
+          <div class="interest-card-icon">🧠</div>
+          <div class="interest-card-title">Consciousness & The Mind</div>
+          <div class="interest-card-desc">Fascinated by how subjective experience emerges from physical matter. Reading everything from Dennett to Chalmers, neuroscience to philosophy of mind.</div>
+        </div>
+
+        <div class="interest-card reveal">
+          <div class="interest-card-icon">🫀</div>
+          <div class="interest-card-title">Human Body & Biology</div>
+          <div class="interest-card-desc">The body is the most sophisticated system I know — and I'm in security. How organs work, how the brain adapts, what makes us tick physically.</div>
+        </div>
+
+        <div class="interest-card reveal">
+          <div class="interest-card-icon">📖</div>
+          <div class="interest-card-title">Reading</div>
+          <div class="interest-card-desc">Books across non-fiction, science, psychology and the occasional good novel. Goodreads shelf is the source of truth.</div>
+        </div>
+
+        <div class="interest-card reveal">
+          <div class="interest-card-icon">🚶</div>
+          <div class="interest-card-title">Walking</div>
+          <div class="interest-card-desc">Daily walks are non-negotiable. Best way I've found to think through problems, clear the mind, and not go insane staring at SIEM dashboards all day.</div>
+        </div>
+
+        <div class="interest-card reveal">
+          <div class="interest-card-icon">🎮</div>
+          <div class="interest-card-title">Gaming</div>
+          <div class="interest-card-desc">Decompress mode. I play across genres and keep meticulous logs because apparently I can't enjoy anything without tracking it.</div>
+        </div>
+
+        <div class="interest-card reveal">
+          <div class="interest-card-icon">🔒</div>
+          <div class="interest-card-title">Digital Privacy</div>
+          <div class="interest-card-desc">Not just a job interest — a personal value. I use what I recommend. Encrypted comms, minimal data footprint, self-hosted where practical.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-copy">
+      © 2025 Pranay Mokida · <span class="mono" style="color:var(--accent);">human.exe</span>
+    </div>
+    <nav class="footer-links">
+      <a href="index.html">Portfolio</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Terminal -->
+<button class="terminal-fab" id="terminal-fab" title="Open terminal">⌨</button>
+<div class="terminal-window" id="terminal-window">
+  <div class="term-bar">
+    <div class="term-dot term-dot-r"></div>
+    <div class="term-dot term-dot-y"></div>
+    <div class="term-dot term-dot-g"></div>
+    <span class="term-title">pranay@pm-terminal ~ bash</span>
+  </div>
+  <div class="terminal-output" id="term-output"></div>
+  <div class="terminal-input-wrap">
+    <span class="term-prompt">pranay@pm ~ $</span>
+    <input type="text" class="terminal-input" id="term-input" placeholder="type a command..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+<div class="achievement-toast" id="achievement-toast">
+  <div class="achievement-icon">🏆</div>
+  <div class="achievement-text">
+    <div class="achievement-label">Achievement Unlocked</div>
+    <div class="achievement-name"></div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
