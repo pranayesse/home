@@ -112,7 +112,7 @@ section { padding: 5rem 0; }
 }
 
 /* ---------- Navigation ---------- */
-nav {
+nav:not(.footer-links) {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
