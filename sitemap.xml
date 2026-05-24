@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
   <url>
     <loc>https://pranaymokida.xyz/</loc>
-    <lastmod>2025-03-08</lastmod>
+    <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Blog listing -->
   <url>
     <loc>https://pranaymokida.xyz/blog.html</loc>
-    <lastmod>2025-03-08</lastmod>
+    <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Blog posts — add a new <url> block each time you publish -->
   <url>
     <loc>https://pranaymokida.xyz/post.html?slug=crowdstrike-threat-hunting-queries</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://pranaymokida.xyz/post.html?slug=cyberark-pam-security-monitoring</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pranaymokida.xyz/post.html?slug=python-soc-automation</loc>
+    <lastmod>2024-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Other pages -->
+  <url>
+    <loc>https://pranaymokida.xyz/links.html</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
