@@ -217,6 +217,13 @@ nav:not(.footer-links) {
 
 .hero-content { position: relative; z-index: 2; }
 
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -229,7 +236,12 @@ nav:not(.footer-links) {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   color: var(--accent);
-  margin-bottom: 1.5rem;
+}
+
+.hero-badge--spec {
+  background: rgba(8, 145, 178, 0.1);
+  border-color: var(--accent2);
+  color: var(--accent2);
 }
 
 .status-dot {
@@ -607,6 +619,21 @@ nav:not(.footer-links) {
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
   margin-left: auto;
+}
+
+.timeline-type-badge {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  background: rgba(8, 145, 178, 0.12);
+  color: var(--accent2);
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  vertical-align: middle;
+  margin-left: 0.4rem;
 }
 
 .timeline-card {
