@@ -51,6 +51,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="links.html">Personal</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -126,18 +127,76 @@
       </div>
       <div class="about-text reveal">
         <p class="section-label">About Me</p>
-        <h2 id="about-heading" class="section-title">Defending systems,<br>one alert at a time.</h2>
+        <h2 id="about-heading" class="section-title">Defender first.<br>Learning to attack next.</h2>
         <p>
-          I'm a Security Analyst currently working as a <strong>Risk Tech & Controls Analyst at JP Morgan Chase</strong>, where I analyze security alerts, monitor privileged access, and strengthen GRC processes across identity and access management infrastructure.
+          I started on the defensive side — SOC triage, identity and access management, privileged access monitoring, GRC. Two-plus years of real alerts, real breaches, and real infrastructure at enterprise scale. Detection engineering, malware analysis, IAM/PAM, compliance programs — I've worked across all of it.
         </p>
         <p>
-          Previously at <strong>Providence India</strong>, I reduced mean time to detection by 40% using CrowdStrike EDR and cut security ticket processing time by 50% through Python automation. I'm passionate about threat hunting, malware analysis, and making security operations more efficient.
+          Now I'm learning the other half. Working through CTFs, studying attack techniques, and mapping offensive thinking back to the defensive controls I've been building. Understanding how attackers operate makes you a sharper defender.
         </p>
         <p>
-          When I'm not incident-responding, I'm sharpening my skills on TryHackMe, reading security research, and exploring the intersection of offensive and defensive security.
+          I write everything down — tool teardowns, quick TILs, CTF walkthroughs. All public, all searchable. A knowledge base I actually maintain, not a highlight reel.
         </p>
         <a href="#contact" class="btn btn-primary" style="margin-top:1rem; display:inline-flex;">Let's Connect →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DOMAINS ========== -->
+<section id="domains" aria-labelledby="domains-heading">
+  <div class="container">
+    <p class="section-label reveal">Knowledge Map</p>
+    <h2 id="domains-heading" class="section-title reveal">Security Domains</h2>
+    <p class="section-subtitle reveal">Areas I work in, study, and write about. Click any tag to read related posts.</p>
+
+    <div class="domain-clusters">
+
+      <div class="domain-cluster reveal">
+        <div class="domain-cluster-header">
+          <span class="domain-cluster-icon">🛡</span>
+          <span class="domain-cluster-label">Defense</span>
+        </div>
+        <div class="domain-tags">
+          <a href="blog.html?domain=detection" class="domain-tag">Detection Engineering</a>
+          <a href="blog.html?domain=threat-hunting" class="domain-tag">Threat Hunting</a>
+          <a href="blog.html?domain=incident-response" class="domain-tag">Incident Response</a>
+          <a href="blog.html?domain=forensics" class="domain-tag">Digital Forensics</a>
+          <a href="blog.html?domain=malware-analysis" class="domain-tag">Malware Analysis</a>
+          <a href="blog.html?domain=iam-pam" class="domain-tag">IAM / PAM</a>
+          <a href="blog.html?domain=endpoint" class="domain-tag">Endpoint Security</a>
+          <a href="blog.html?domain=network" class="domain-tag">Network Security</a>
+          <a href="blog.html?domain=vulnerability" class="domain-tag">Vuln Management</a>
+        </div>
+      </div>
+
+      <div class="domain-cluster domain-cluster--offense reveal">
+        <div class="domain-cluster-header">
+          <span class="domain-cluster-icon">⚔️</span>
+          <span class="domain-cluster-label">Offense <span class="learning-badge">Learning</span></span>
+        </div>
+        <div class="domain-tags">
+          <a href="blog.html?domain=red-team" class="domain-tag domain-tag--offense">Red Team Concepts</a>
+          <a href="blog.html?domain=osint" class="domain-tag domain-tag--offense">OSINT</a>
+          <a href="blog.html?domain=ctf" class="domain-tag domain-tag--offense">CTF</a>
+          <a href="blog.html?domain=web-security" class="domain-tag domain-tag--offense">Web App Security</a>
+          <a href="blog.html?domain=privesc" class="domain-tag domain-tag--offense">Privilege Escalation</a>
+        </div>
+      </div>
+
+      <div class="domain-cluster domain-cluster--gov reveal">
+        <div class="domain-cluster-header">
+          <span class="domain-cluster-icon">📋</span>
+          <span class="domain-cluster-label">Governance</span>
+        </div>
+        <div class="domain-tags">
+          <a href="blog.html?domain=grc" class="domain-tag domain-tag--gov">GRC &amp; Risk</a>
+          <a href="blog.html?domain=compliance" class="domain-tag domain-tag--gov">ISO 27001 / Compliance</a>
+          <a href="blog.html?domain=cloud" class="domain-tag domain-tag--gov">Cloud Security</a>
+          <a href="blog.html?domain=architecture" class="domain-tag domain-tag--gov">Security Architecture</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -235,6 +294,43 @@
         <p class="project-desc">Pulls LinkedIn and Indeed job alerts from Gmail every 5 hours, parses the emails, and syncs them to an Airtable dashboard with Open / Applied / Not Relevant status tracking. Zero copy-pasting, zero lost opportunities.</p>
         <div class="project-tags">
           <span class="tag">Python</span><span class="tag">Gmail API</span><span class="tag">Airtable</span><span class="tag">Automation</span><span class="tag">macOS launchd</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTF & LEARNING ========== -->
+<section id="ctf" aria-labelledby="ctf-heading">
+  <div class="container">
+    <p class="section-label reveal">Progress Tracker</p>
+    <h2 id="ctf-heading" class="section-title reveal">CTF &amp; Learning</h2>
+    <p class="section-subtitle reveal">Tracking every room rooted and every concept clicked — in public. Updated as I go.</p>
+    <div class="ctf-grid">
+
+      <div class="ctf-platform-card reveal">
+        <div class="ctf-platform-header">
+          <span class="ctf-platform-icon">⚑</span>
+          <div>
+            <div class="ctf-platform-name">TryHackMe</div>
+            <a href="https://tryhackme.com/p/pranaymokida" target="_blank" rel="noopener" class="ctf-profile-link">@pranaymokida →</a>
+          </div>
+        </div>
+        <img src="https://tryhackme-badges.s3.amazonaws.com/pranaymokida.png"
+             alt="TryHackMe rank badge for pranaymokida"
+             class="ctf-badge-img"
+             loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+
+      <div class="ctf-log reveal">
+        <div class="ctf-log-header">
+          <span class="ctf-log-title">Recent Completions</span>
+          <a href="blog.html?domain=ctf" class="ctf-view-all">CTF write-ups →</a>
+        </div>
+        <div id="ctf-completions-list">
+          <!-- populated by ctf-data.js -->
         </div>
       </div>
 
@@ -444,6 +540,29 @@
   </div>
 </div>
 
+<script src="ctf-data.js"></script>
+<script>
+(function() {
+  var list = document.getElementById('ctf-completions-list');
+  if (!list || typeof CTF_DATA === 'undefined') return;
+  var items = CTF_DATA.completions;
+  if (!items || items.length === 0) {
+    list.innerHTML = '<div class="ctf-empty">No entries yet — first room in progress.</div>';
+    return;
+  }
+  list.innerHTML = items.slice(0, 5).map(function(c) {
+    return '<a href="' + (c.url || '#') + '" target="_blank" rel="noopener" class="ctf-entry">' +
+      '<div class="ctf-entry-name">' + c.name + '</div>' +
+      '<div class="ctf-entry-meta">' +
+        '<span class="ctf-platform-tag">' + c.platform + '</span>' +
+        '<span class="ctf-category">' + c.category + '</span>' +
+        '<span class="ctf-diff ctf-diff--' + c.difficulty + '">' + c.difficulty + '</span>' +
+        '<span class="ctf-date">' + c.date + '</span>' +
+      '</div>' +
+    '</a>';
+  }).join('');
+})();
+</script>
 <script src="js/main.js"></script>
 </body>
 </html>
