@@ -29,6 +29,28 @@
 
 var BLOG_POSTS = [
   {
+    slug:       'metadata-as-identity-support-social-engineering',
+    title:      'When Support Asks "What Device Are You On?" — That\'s Not Identity Verification',
+    date:       'May 2026',
+    readTime:   '6 min read',
+    domain:     'red-team',
+    type:       'research',
+    difficulty: 'beginner',
+    tags:       ['Social Engineering', 'Account Takeover', 'Canary Tokens', 'Support Channels', 'Identity Verification'],
+    excerpt:    'Spotify\'s support flow once let you update a recovery email after verifying device metadata — details that are observable, not secret. A look at why "things you know about the account" is a weaker identity check than it sounds.'
+  },
+  {
+    slug:       'password-reset-identity-problem',
+    title:      'Password Resets Are Broken — And It\'s Not the User\'s Fault',
+    date:       'May 2026',
+    readTime:   '5 min read',
+    domain:     'red-team',
+    type:       'research',
+    difficulty: 'beginner',
+    tags:       ['Social Engineering', 'Password Reset', 'Identity Verification', 'Helpdesk Security', 'Authentication'],
+    excerpt:    'Most helpdesk password reset flows treat "user provided an email address" as proof of identity. It isn\'t. A breakdown of why the email-as-identity assumption is fundamentally broken and what proper verification actually requires.'
+  },
+  {
     slug:       'crowdstrike-threat-hunting-queries',
     title:      'Threat Hunting with CrowdStrike: Query Patterns That Actually Find Threats',
     date:       'Feb 2025',
