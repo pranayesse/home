@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    HOW TO USE THIS TEMPLATE
+    ========================
+    1. Copy this file and rename it to your-post-slug.html
+    2. Fill in every value marked with [EDIT]
+    3. Create the matching your-post-slug.md file in this same folder
+    4. Add the post entry to ../blog-data.js
+    5. Add the URL to ../sitemap.xml
+    See INSTRUCTIONS.md for full details.
+  -->
+
+  <title>[EDIT: Post title] · Pranay Mokida</title>
+  <meta name="description" content="[EDIT: 1-2 sentence excerpt — same as the excerpt field in blog-data.js]">
+  <meta name="keywords" content="[EDIT: comma-separated keywords]">
+  <meta name="author" content="Pranay Mokida">
+  <link rel="canonical" href="https://pranaymokida.xyz/posts/[EDIT: your-post-slug].html">
+
+  <!-- Open Graph — controls LinkedIn, Slack, WhatsApp previews -->
+  <meta property="og:type"        content="article">
+  <meta property="og:url"         content="https://pranaymokida.xyz/posts/[EDIT: your-post-slug].html">
+  <meta property="og:site_name"   content="Pranay Mokida · Security Log">
+  <meta property="og:title"       content="[EDIT: Post title]">
+  <meta property="og:description" content="[EDIT: Same as meta description above]">
+  <meta property="og:image"       content="https://pranaymokida.xyz/illustration.png">
+  <meta property="article:author" content="Pranay Mokida">
+  <meta property="article:tag"    content="[EDIT: Tag 1]">
+  <meta property="article:tag"    content="[EDIT: Tag 2]">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="[EDIT: Post title]">
+  <meta name="twitter:description" content="[EDIT: One-sentence hook for Twitter]">
+  <meta name="twitter:image"       content="https://pranaymokida.xyz/illustration.png">
+
+  <!-- JSON-LD Article schema — crawlable by Google without JS -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "[EDIT: Post title]",
+    "description": "[EDIT: Same as meta description]",
+    "author": { "@type": "Person", "name": "Pranay Mokida", "url": "https://pranaymokida.xyz" },
+    "publisher": { "@type": "Person", "name": "Pranay Mokida" },
+    "datePublished": "[EDIT: YYYY-MM-DD]",
+    "keywords": "[EDIT: comma-separated keywords]",
+    "url": "https://pranaymokida.xyz/posts/[EDIT: your-post-slug].html",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://pranaymokida.xyz/posts/[EDIT: your-post-slug].html" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡</text></svg>">
+</head>
+<body>
+
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><span>&gt;</span> PM_</a>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="../index.html#home">Home</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#domains">Domains</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../blog.html">Blog</a></li>
+      <li><a href="../links.html">Personal</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">⬤ Dark</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="post-hero">
+  <div class="container">
+    <a href="../blog.html" style="font-family:var(--mono);font-size:0.78rem;color:var(--muted);display:inline-flex;align-items:center;gap:0.3rem;margin-bottom:1rem;text-decoration:none;">← Back to Security Log</a>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.85rem;align-items:center;">
+      <!--
+        Domain badge class options:
+          blog-domain-badge--defense
+          blog-domain-badge--offense
+          blog-domain-badge--governance
+          blog-domain-badge--automation
+        Type options: 💡 TIL  |  🔧 Tool Teardown  |  🚩 CTF Write-up  |  📖 Research
+        Difficulty class options: post-diff--beginner  post-diff--intermediate  post-diff--advanced
+      -->
+      <span class="blog-domain-badge blog-domain-badge--[EDIT]">[EDIT: Domain label]</span>
+      <span class="blog-type-badge">[EDIT: 🔧 Tool Teardown]</span>
+      <span class="post-diff post-diff--[EDIT: beginner]">[EDIT: beginner]</span>
+    </div>
+    <h1 class="section-title">[EDIT: Post title]</h1>
+    <div class="post-meta">
+      <span>[EDIT: Mon YYYY]</span>
+      <span>[EDIT: X min read]</span>
+      <span class="tag">[EDIT: Tag 1]</span>
+      <span class="tag">[EDIT: Tag 2]</span>
+    </div>
+  </div>
+</div>
+
+<article class="post-body" id="post-body">
+  <div style="color:var(--muted);font-family:var(--mono);font-size:0.85rem;text-align:center;padding:3rem 0;">Loading…</div>
+</article>
+
+<div class="container" style="padding-bottom:4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:740px;">
+  <a id="prev-post" href="../blog.html" class="btn btn-outline" style="font-size:0.78rem;">← Previous</a>
+  <a href="../blog.html" class="btn btn-outline" style="font-size:0.78rem;">All Posts</a>
+  <a id="next-post" href="../blog.html" class="btn btn-outline" style="font-size:0.78rem;">Next →</a>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-copy">© 2026 Pranay Mokida · <span class="mono" style="color:var(--accent);">pranaymokida.xyz</span></div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="../index.html">Home</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<button class="terminal-fab" id="terminal-fab" aria-label="Open terminal" title="Open terminal">⌨</button>
+<div class="terminal-window" id="terminal-window" role="dialog" aria-label="Interactive terminal">
+  <div class="term-bar">
+    <div class="term-dot term-dot-r"></div><div class="term-dot term-dot-y"></div><div class="term-dot term-dot-g"></div>
+    <span class="term-title">pranay@pm-terminal ~ bash</span>
+  </div>
+  <div class="terminal-output" id="term-output"></div>
+  <div class="terminal-input-wrap">
+    <span class="term-prompt">pranay@pm ~ $</span>
+    <input type="text" class="terminal-input" id="term-input" placeholder="type a command..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+<div class="achievement-toast" id="achievement-toast" role="status" aria-live="polite">
+  <div class="achievement-icon">🏆</div>
+  <div class="achievement-text">
+    <div class="achievement-label">Achievement Unlocked</div>
+    <div class="achievement-name"></div>
+  </div>
+</div>
+
+<script src="../blog-data.js"></script>
+<script src="../js/post-render.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

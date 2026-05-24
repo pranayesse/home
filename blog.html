@@ -188,7 +188,7 @@
       var typeLabel   = TYPE_LABELS[p.type] || p.type || '';
       var diff        = p.difficulty || '';
       return '<div class="blog-card-wrap" data-domain="' + (p.domain || '') + '" data-type="' + (p.type || '') + '">' +
-        '<a href="post.html?slug=' + p.slug + '" class="blog-card">' +
+        '<a href="posts/' + p.slug + '.html" class="blog-card">' +
           '<div class="blog-card-meta">' +
             (domainLabel ? '<span class="blog-domain-badge blog-domain-badge--' + (DOMAIN_GROUP[p.domain] || 'other') + '">' + domainLabel + '</span>' : '') +
             (typeLabel   ? '<span class="blog-type-badge">' + typeLabel + '</span>' : '') +

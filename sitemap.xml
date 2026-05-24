@@ -17,33 +17,33 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Blog posts — add a new <url> block each time you publish -->
+  <!-- Blog posts — individual HTML files with static OG/SEO heads -->
   <url>
-    <loc>https://pranaymokida.xyz/post.html?slug=metadata-as-identity-support-social-engineering</loc>
+    <loc>https://pranaymokida.xyz/posts/metadata-as-identity-support-social-engineering.html</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pranaymokida.xyz/post.html?slug=password-reset-identity-problem</loc>
+    <loc>https://pranaymokida.xyz/posts/password-reset-identity-problem.html</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pranaymokida.xyz/post.html?slug=crowdstrike-threat-hunting-queries</loc>
+    <loc>https://pranaymokida.xyz/posts/crowdstrike-threat-hunting-queries.html</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pranaymokida.xyz/post.html?slug=cyberark-pam-security-monitoring</loc>
+    <loc>https://pranaymokida.xyz/posts/cyberark-pam-security-monitoring.html</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pranaymokida.xyz/post.html?slug=python-soc-automation</loc>
+    <loc>https://pranaymokida.xyz/posts/python-soc-automation.html</loc>
     <lastmod>2024-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
