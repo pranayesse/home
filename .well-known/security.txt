@@ -1,0 +1,13 @@
+# Security policy for pranaymokida.xyz
+# RFC 9116 — https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:pranay.mokida@protonmail.com
+Contact: https://pranaymokida.xyz/#contact
+Expires: 2027-06-09T00:00:00.000Z
+Encryption: https://pranaymokida.xyz/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://pranaymokida.xyz/.well-known/security.txt
+
+# Found something? I'd genuinely love to hear about it.
+# Static site, no backend — but reports about anything on this
+# domain are welcome and will get a reply.
