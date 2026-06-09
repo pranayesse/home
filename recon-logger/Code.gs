@@ -3,16 +3,16 @@
  * Appends visitor recon data (posted from the portfolio's recon widget)
  * to a Google Sheet.
  *
- * This is a CONTAINER-BOUND script: create it from inside the Sheet that
- * should hold the logs (Extensions → Apps Script), paste this in, then
- * deploy as a Web app. See README.md for full steps.
+ * CONTAINER-BOUND script: create it from inside the Sheet that should hold
+ * the logs (Extensions → Apps Script), paste this in, then deploy as a Web
+ * app. See README.md for full steps.
+ *
+ * Columns are created automatically from the posted JSON keys, so adding new
+ * fields on the client side requires no change here — new keys become new
+ * columns ("log everything" stays future-proof).
  */
 
 var SHEET_NAME = 'recon';
-var HEADERS = [
-  'timestamp', 'ip', 'city', 'region', 'country', 'org',
-  'browser', 'os', 'lang', 'referrer', 'page', 'user_agent'
-];
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -27,13 +27,33 @@ function doPost(e) {
 
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
-    if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
 
-    sheet.appendRow([
-      data.ts || new Date().toISOString(),
-      data.ip, data.city, data.region, data.country, data.org,
-      data.browser, data.os, data.lang, data.referrer, data.page, data.ua
-    ]);
+    // Read existing header row (if any).
+    var headers = sheet.getLastRow() > 0
+      ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+      : [];
+
+    // Always keep 'timestamp' as the first column.
+    if (headers.length === 0) {
+      headers = ['timestamp'];
+      sheet.getRange(1, 1, 1, 1).setValues([headers]);
+    }
+
+    // Add any new keys from this payload as new columns.
+    var added = false;
+    Object.keys(data).forEach(function (k) {
+      if (k === 'ts') return; // mapped to 'timestamp'
+      if (headers.indexOf(k) === -1) { headers.push(k); added = true; }
+    });
+    if (added) sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+
+    // Build the row in header order.
+    var row = headers.map(function (h) {
+      if (h === 'timestamp') return data.ts || data.timestamp || new Date().toISOString();
+      var v = data[h];
+      return (v === undefined || v === null) ? '' : v;
+    });
+    sheet.appendRow(row);
 
     return _json({ ok: true });
   } catch (err) {

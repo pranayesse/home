@@ -646,19 +646,55 @@ window.addEventListener('DOMContentLoaded', () => {
       if (!RECON_LOG_ENDPOINT) return;
       if (sessionStorage.getItem('pm-recon-logged')) return; // once per session
       try {
+        const g = geo || {};
+        const nav = navigator;
+        const scr = window.screen || {};
+        const conn = nav.connection || nav.mozConnection || nav.webkitConnection || {};
         const payload = {
           ts: new Date().toISOString(),
-          ip: (geo && geo.ip) || null,
-          city: (geo && geo.city) || null,
-          region: (geo && geo.region) || null,
-          country: (geo && geo.country_name) || null,
-          org: (geo && geo.org) || null,
+          // --- network / geo (ipapi.co) ---
+          ip: g.ip || null,
+          ip_version: g.version || null,
+          city: g.city || null,
+          region: g.region || null,
+          region_code: g.region_code || null,
+          country: g.country_name || null,
+          country_code: g.country_code || null,
+          continent: g.continent_code || null,
+          in_eu: typeof g.in_eu === 'boolean' ? g.in_eu : null,
+          postal: g.postal || null,
+          latitude: g.latitude || null,
+          longitude: g.longitude || null,
+          timezone: g.timezone || null,
+          utc_offset: g.utc_offset || null,
+          calling_code: g.country_calling_code || null,
+          currency: g.currency || null,
+          asn: g.asn || null,
+          org: g.org || null,
+          // --- client / device ---
           browser: browser,
           os: os,
-          lang: navigator.language || null,
+          user_agent: ua,
+          language: nav.language || null,
+          languages: (nav.languages || []).join(',') || null,
+          platform: nav.platform || null,
+          tz_browser: (Intl.DateTimeFormat().resolvedOptions().timeZone) || null,
+          screen: (scr.width || '?') + 'x' + (scr.height || '?'),
+          viewport: window.innerWidth + 'x' + window.innerHeight,
+          dpr: window.devicePixelRatio || null,
+          color_depth: scr.colorDepth || null,
+          device_memory: (nav.deviceMemory != null ? nav.deviceMemory : null),
+          cpu_cores: (nav.hardwareConcurrency != null ? nav.hardwareConcurrency : null),
+          touch: ('ontouchstart' in window) || nav.maxTouchPoints > 0,
+          connection: conn.effectiveType || null,
+          downlink: (conn.downlink != null ? conn.downlink : null),
+          cookies_enabled: nav.cookieEnabled,
+          dnt: nav.doNotTrack || null,
+          // --- visit ---
           referrer: document.referrer || null,
           page: location.pathname,
-          ua: ua
+          page_url: location.href,
+          title: document.title
         };
         fetch(RECON_LOG_ENDPOINT, {
           method: 'POST',

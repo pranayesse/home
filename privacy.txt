@@ -7,13 +7,21 @@ tracking cookies.
 Visitor recon logging
 ---------------------
 The site's hero "recon" widget reads your approximate location (via the
-third-party service ipapi.co) and your browser/OS to display a line back to
-you. When central logging is enabled, the following is recorded to a private
-Google Sheet owned by the site author:
+third-party service ipapi.co) and your device details to display a line back to
+you. When central logging is enabled, the following technical details are
+recorded to a private Google Sheet owned by the site author:
 
-  - IP address (and ISP/org, approximate city/region/country) from ipapi.co
-  - Browser and operating system
-  - Browser language, referring URL, and the page you landed on
+  - IP address and IP version
+  - Approximate location from your IP: city, region, country, continent,
+    postal code, latitude/longitude, timezone, currency, calling code
+  - Network operator / ASN / organisation
+  - Browser, operating system, platform, and full user-agent string
+  - Browser language(s) and browser timezone
+  - Screen size, viewport size, pixel ratio, colour depth
+  - Approximate device memory, CPU core count, touch support
+  - Network connection type and downlink speed
+  - Cookie-enabled flag and Do-Not-Track setting
+  - The referring URL, and the page/title you landed on
   - A timestamp
 
 This data is collected to understand who visits the site. It is not sold or
