@@ -640,7 +640,7 @@ window.addEventListener('DOMContentLoaded', () => {
        See recon-logger/README.md for the Google Apps Script + Sheet setup.
        Logging visitor IPs is personal data; keep the privacy note in the
        footer (privacy.txt) accurate if you enable this. */
-    const RECON_LOG_ENDPOINT = '';
+    const RECON_LOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxmb7_JlIxvw-FDDItAr9qobGNaxbKuseIxYVG4CG_Huz4ag_9rVRQ33U1e0488EBld5g/exec';
 
     function logRecon(geo) {
       if (!RECON_LOG_ENDPOINT) return;
