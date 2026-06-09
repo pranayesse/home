@@ -636,6 +636,41 @@ window.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => recon.classList.add('on'));
     }
 
+    /* Recon logging — OFF until you paste your deployed endpoint URL below.
+       See recon-logger/README.md for the Google Apps Script + Sheet setup.
+       Logging visitor IPs is personal data; keep the privacy note in the
+       footer (privacy.txt) accurate if you enable this. */
+    const RECON_LOG_ENDPOINT = '';
+
+    function logRecon(geo) {
+      if (!RECON_LOG_ENDPOINT) return;
+      if (sessionStorage.getItem('pm-recon-logged')) return; // once per session
+      try {
+        const payload = {
+          ts: new Date().toISOString(),
+          ip: (geo && geo.ip) || null,
+          city: (geo && geo.city) || null,
+          region: (geo && geo.region) || null,
+          country: (geo && geo.country_name) || null,
+          org: (geo && geo.org) || null,
+          browser: browser,
+          os: os,
+          lang: navigator.language || null,
+          referrer: document.referrer || null,
+          page: location.pathname,
+          ua: ua
+        };
+        fetch(RECON_LOG_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(() => {});
+        sessionStorage.setItem('pm-recon-logged', '1');
+      } catch (_) { /* never let logging break the page */ }
+    }
+
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 4000);
     fetch('https://ipapi.co/json/', { signal: ctrl.signal })
@@ -644,7 +679,8 @@ window.addEventListener('DOMContentLoaded', () => {
         clearTimeout(timer);
         const loc = geo && geo.city && geo.country_code ? geo.city + ', ' + geo.country_code : null;
         renderRecon(loc);
+        logRecon(geo);
       })
-      .catch(() => { clearTimeout(timer); renderRecon(null); });
+      .catch(() => { clearTimeout(timer); renderRecon(null); logRecon(null); });
   }
 });
