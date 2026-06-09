@@ -1781,3 +1781,35 @@ footer {
   #cursor-spotlight { display: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- TryHackMe live stats ---------- */
+.thm-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.thm-stat {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.4rem;
+  text-align: center;
+}
+.thm-stat-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+.thm-stat-lbl {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}

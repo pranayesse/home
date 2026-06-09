@@ -336,6 +336,7 @@
              class="ctf-badge-img"
              loading="lazy"
              onerror="this.style.display='none'">
+        <div class="thm-stats" id="thm-stats" hidden></div>
       </div>
 
       <div class="ctf-log reveal">
@@ -558,6 +559,70 @@
       '</div>' +
     '</a>';
   }).join('');
+})();
+
+/* TryHackMe live stats — points / rank / rooms.
+   THM has no official public API and most endpoints don't send CORS headers,
+   so this is best-effort: it tries the public-profile endpoint and, on
+   failure, falls back to a CORS proxy. If both fail it stays hidden and the
+   badge still shows. Nothing here ever blocks or errors the page. */
+(function() {
+  var box = document.getElementById('thm-stats');
+  if (!box || typeof CTF_DATA === 'undefined') return;
+  var thm = (CTF_DATA.platforms || []).find(function(p){ return p.name === 'TryHackMe'; });
+  var user = thm && thm.handle;
+  if (!user) return;
+
+  var cacheKey = 'pm-thm-stats';
+  function fmt(n){ return (typeof n === 'number') ? n.toLocaleString() : n; }
+
+  function pick(obj, keys){
+    for (var i = 0; i < keys.length; i++){
+      var v = obj && obj[keys[i]];
+      if (v !== undefined && v !== null && v !== '') return v;
+    }
+    return null;
+  }
+
+  function render(data){
+    var d = (data && data.data) ? data.data : data;
+    if (!d) return;
+    var points = pick(d, ['points','userPoints','totalPoints']);
+    var rank   = pick(d, ['rank','userRank']);
+    var rooms  = pick(d, ['completedRoomsCount','roomsCompleted','completedRooms','rooms']);
+    if (typeof rooms === 'object' && rooms) rooms = rooms.length || pick(rooms, ['count','total']);
+    var cells = [];
+    if (points != null) cells.push(['Points', fmt(points)]);
+    if (rank   != null) cells.push(['Rank', '#' + fmt(rank)]);
+    if (rooms  != null) cells.push(['Rooms', fmt(rooms)]);
+    if (!cells.length) return;
+    box.innerHTML = cells.map(function(c){
+      return '<div class="thm-stat"><span class="thm-stat-num">' + c[1] +
+             '</span><span class="thm-stat-lbl">' + c[0] + '</span></div>';
+    }).join('');
+    box.hidden = false;
+  }
+
+  // Serve instantly from cache (24h) so it shows even if the network is slow.
+  try {
+    var c = JSON.parse(sessionStorage.getItem(cacheKey) || 'null');
+    if (c && Date.now() - c.t < 86400000) render(c.data);
+  } catch (e) {}
+
+  var api = 'https://tryhackme.com/api/v2/public-profile?username=' + encodeURIComponent(user);
+  var proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(api);
+
+  function tryFetch(url){
+    return fetch(url, { headers: { 'Accept': 'application/json' } })
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); });
+  }
+
+  tryFetch(api).catch(function(){ return tryFetch(proxy); })
+    .then(function(data){
+      render(data);
+      try { sessionStorage.setItem(cacheKey, JSON.stringify({ t: Date.now(), data: data })); } catch (e) {}
+    })
+    .catch(function(){ /* keep hidden; badge still shows */ });
 })();
 </script>
 <script src="js/main.js"></script>
