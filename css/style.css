@@ -1638,3 +1638,146 @@ footer {
 
 /* ---------- Utility ---------- */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* ---------- Scroll Progress Bar ---------- */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 600;
+  pointer-events: none;
+}
+
+/* ---------- Cursor Spotlight ---------- */
+#cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 550;
+  background: radial-gradient(480px circle at var(--spot-x, 50%) var(--spot-y, 50%), var(--accent-glow), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#cursor-spotlight.on { opacity: 0.35; }
+[data-theme="dark"] #cursor-spotlight.on { opacity: 0.6; }
+
+/* ---------- Recon Line (hero) ---------- */
+.recon-line {
+  margin-top: 2rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.recon-line.on { opacity: 1; transform: none; }
+.recon-line .ok { color: var(--accent); }
+.recon-line .sep { margin: 0 0.45rem; opacity: 0.5; }
+
+/* ---------- Live from GitHub ---------- */
+.gh-live { margin-top: 2.75rem; }
+.gh-live-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+.gh-live-title {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.gh-live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50% { box-shadow: 0 0 0 6px transparent; }
+}
+.gh-repos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+.gh-repo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  text-decoration: none;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.gh-repo:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.gh-repo-name {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  word-break: break-word;
+}
+.gh-repo-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+}
+.gh-repo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.gh-repo-meta .lang-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent2);
+  margin-right: 0.3rem;
+  vertical-align: middle;
+}
+
+/* ---------- Last Updated Badge ---------- */
+.last-updated {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.last-updated::before {
+  content: '●';
+  color: var(--accent);
+  margin-right: 0.35rem;
+  font-size: 0.6rem;
+  vertical-align: middle;
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #cursor-spotlight { display: none; }
+  html { scroll-behavior: auto; }
+}

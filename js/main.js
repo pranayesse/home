@@ -15,7 +15,8 @@ function applyTheme(theme) {
 
 function initTheme() {
   const saved = localStorage.getItem(themeKey);
-  applyTheme(saved || 'light');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved || (prefersDark ? 'dark' : 'light'));
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -241,7 +242,7 @@ window.addEventListener('DOMContentLoaded', () => {
     whoami: () => [
       { cls: 'term-line-accent', text: '> Pranay Mokida' },
       { cls: '', text: '  Role       : Risk Tech & Controls Analyst @ JP Morgan Chase' },
-      { cls: '', text: '  Exp        : 2+ years in cybersecurity' },
+      { cls: '', text: '  Exp        : 4+ years in cybersecurity' },
       { cls: '', text: '  Location   : Hyderabad, India' },
       { cls: '', text: '  Focus      : Threat hunting, incident response, GRC' },
     ],
@@ -406,5 +407,244 @@ window.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
+  }
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Scroll Progress Bar ---------- */
+  const progress = document.createElement('div');
+  progress.id = 'scroll-progress';
+  document.body.appendChild(progress);
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ---------- Cursor Spotlight ---------- */
+  if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    const spot = document.createElement('div');
+    spot.id = 'cursor-spotlight';
+    document.body.appendChild(spot);
+
+    window.addEventListener('pointermove', (e) => {
+      spot.style.setProperty('--spot-x', e.clientX + 'px');
+      spot.style.setProperty('--spot-y', e.clientY + 'px');
+      spot.classList.add('on');
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => spot.classList.remove('on'));
+  }
+
+  /* ---------- Section Title Decode Effect ---------- */
+  if (!reducedMotion) {
+    const DECODE_CHARS = '!<>-_\\/[]{}=+*^?#$%&@01';
+
+    function collectTextNodes(node, out) {
+      node.childNodes.forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          if (child.textContent.trim()) out.push(child);
+        } else {
+          collectTextNodes(child, out);
+        }
+      });
+    }
+
+    function decodeTitle(el) {
+      if (el.dataset.decoding) return;
+      el.dataset.decoding = '1';
+      const nodes = [];
+      collectTextNodes(el, nodes);
+      const originals = nodes.map(n => n.textContent);
+      const duration = 650;
+      const start = performance.now();
+
+      function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        nodes.forEach((node, idx) => {
+          const text = originals[idx];
+          const revealed = Math.floor(p * text.length);
+          let out = text.slice(0, revealed);
+          for (let i = revealed; i < text.length; i++) {
+            out += text[i] === ' ' ? ' ' : DECODE_CHARS[Math.floor(Math.random() * DECODE_CHARS.length)];
+          }
+          node.textContent = out;
+        });
+        if (p < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          nodes.forEach((node, idx) => { node.textContent = originals[idx]; });
+          delete el.dataset.decoding;
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    const titles = document.querySelectorAll('.section-title');
+    const titleObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          decodeTitle(e.target);
+          titleObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    titles.forEach(t => {
+      titleObs.observe(t);
+      t.addEventListener('mouseenter', () => decodeTitle(t));
+    });
+  }
+
+  /* ---------- Cached JSON fetch (sessionStorage, 1h TTL) ---------- */
+  async function cachedJSON(key, url) {
+    try {
+      const cached = sessionStorage.getItem(key);
+      if (cached) {
+        const { t, data } = JSON.parse(cached);
+        if (Date.now() - t < 3600000) return data;
+      }
+    } catch { /* ignore bad cache */ }
+    const res = await fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    try { sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), data })); } catch { /* quota */ }
+    return data;
+  }
+
+  function relTime(iso) {
+    const days = (Date.now() - new Date(iso).getTime()) / 86400000;
+    if (days < 1) return 'today';
+    if (days < 2) return 'yesterday';
+    if (days < 30) return Math.floor(days) + 'd ago';
+    if (days < 365) return Math.floor(days / 30) + 'mo ago';
+    return Math.floor(days / 365) + 'y ago';
+  }
+
+  /* ---------- Live GitHub Activity ---------- */
+  const ghLive = document.getElementById('gh-live');
+  const ghRepos = document.getElementById('gh-repos');
+  if (ghLive && ghRepos) {
+    cachedJSON('pm-gh-repos', 'https://api.github.com/users/pranayesse/repos?sort=pushed&per_page=12')
+      .then(repos => {
+        const top = repos.filter(r => !r.fork).slice(0, 4);
+        if (!top.length) return;
+        top.forEach(r => {
+          const a = document.createElement('a');
+          a.className = 'gh-repo';
+          a.href = r.html_url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+
+          const name = document.createElement('div');
+          name.className = 'gh-repo-name';
+          name.textContent = r.name;
+
+          const desc = document.createElement('div');
+          desc.className = 'gh-repo-desc';
+          desc.textContent = r.description || 'No description — code speaks for itself.';
+
+          const meta = document.createElement('div');
+          meta.className = 'gh-repo-meta';
+          if (r.language) {
+            const lang = document.createElement('span');
+            const dot = document.createElement('span');
+            dot.className = 'lang-dot';
+            lang.appendChild(dot);
+            lang.appendChild(document.createTextNode(r.language));
+            meta.appendChild(lang);
+          }
+          if (r.stargazers_count > 0) {
+            const stars = document.createElement('span');
+            stars.textContent = '★ ' + r.stargazers_count;
+            meta.appendChild(stars);
+          }
+          const pushed = document.createElement('span');
+          pushed.textContent = 'pushed ' + relTime(r.pushed_at);
+          meta.appendChild(pushed);
+
+          a.append(name, desc, meta);
+          ghRepos.appendChild(a);
+        });
+        ghLive.hidden = false;
+      })
+      .catch(() => { /* API unreachable or rate-limited — keep section hidden */ });
+  }
+
+  /* ---------- Last Updated Badge ---------- */
+  const lastUpdated = document.getElementById('last-updated');
+  if (lastUpdated) {
+    cachedJSON('pm-gh-updated', 'https://api.github.com/repos/pranayesse/home/commits?per_page=1')
+      .then(commits => {
+        const date = commits && commits[0] && commits[0].commit && commits[0].commit.committer.date;
+        if (!date) return;
+        lastUpdated.textContent = 'updated ' + relTime(date);
+        lastUpdated.hidden = false;
+      })
+      .catch(() => { /* keep hidden */ });
+  }
+
+  /* ---------- Recon Visitor Widget ---------- */
+  const recon = document.getElementById('recon-line');
+  if (recon) {
+    const ua = navigator.userAgent;
+    const browser =
+      /Edg\//.test(ua) ? 'Edge' :
+      /OPR\//.test(ua) ? 'Opera' :
+      /Firefox\//.test(ua) ? 'Firefox' :
+      /Chrome\//.test(ua) ? 'Chrome' :
+      /Safari\//.test(ua) ? 'Safari' : 'unknown agent';
+    const os =
+      /Windows/.test(ua) ? 'Windows' :
+      /Android/.test(ua) ? 'Android' :
+      /iPhone|iPad|iPod/.test(ua) ? 'iOS' :
+      /Mac OS X/.test(ua) ? 'macOS' :
+      /Linux/.test(ua) ? 'Linux' : 'unknown OS';
+
+    function renderRecon(location) {
+      recon.textContent = '';
+      const tag = document.createElement('span');
+      tag.className = 'ok';
+      tag.textContent = '[RECON]';
+      recon.appendChild(tag);
+      recon.appendChild(document.createTextNode(' connection traced → '));
+
+      const parts = [browser, os];
+      if (location) parts.push(location);
+      parts.forEach((p, i) => {
+        if (i > 0) {
+          const sep = document.createElement('span');
+          sep.className = 'sep';
+          sep.textContent = '·';
+          recon.appendChild(sep);
+        }
+        recon.appendChild(document.createTextNode(p));
+      });
+
+      const sep = document.createElement('span');
+      sep.className = 'sep';
+      sep.textContent = '·';
+      recon.appendChild(sep);
+      recon.appendChild(document.createTextNode('threat level: '));
+      const ok = document.createElement('span');
+      ok.className = 'ok';
+      ok.textContent = 'benign ✓';
+      recon.appendChild(ok);
+
+      recon.hidden = false;
+      requestAnimationFrame(() => recon.classList.add('on'));
+    }
+
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
+    fetch('https://ipapi.co/json/', { signal: ctrl.signal })
+      .then(r => r.ok ? r.json() : null)
+      .then(geo => {
+        clearTimeout(timer);
+        const loc = geo && geo.city && geo.country_code ? geo.city + ', ' + geo.country_code : null;
+        renderRecon(loc);
+      })
+      .catch(() => { clearTimeout(timer); renderRecon(null); });
   }
 });

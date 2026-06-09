@@ -1,0 +1,11 @@
+# PGP public key for pranay.mokida@protonmail.com
+#
+# PLACEHOLDER — replace this file's contents with your ASCII-armored
+# public key. Since this address is on ProtonMail, a keypair already
+# exists; export the public key with either:
+#
+#   1. ProtonMail web → Settings → Encryption & keys → Export public key
+#   2. curl "https://api.protonmail.ch/pks/lookup?op=get&search=pranay.mokida@protonmail.com"
+#
+# Then paste the block here, starting with:
+# -----BEGIN PGP PUBLIC KEY BLOCK-----
