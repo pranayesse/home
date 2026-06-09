@@ -1,0 +1,40 @@
+Privacy note — pranaymokida.xyz
+================================
+
+This is a static personal portfolio. It uses no advertising and sets no
+tracking cookies.
+
+Visitor recon logging
+---------------------
+The site's hero "recon" widget reads your approximate location (via the
+third-party service ipapi.co) and your device details to display a line back to
+you. When central logging is enabled, the following technical details are
+recorded to a private Google Sheet owned by the site author:
+
+  - IP address and IP version
+  - Approximate location from your IP: city, region, country, continent,
+    postal code, latitude/longitude, timezone, currency, calling code
+  - Network operator / ASN / organisation
+  - Browser, operating system, platform, and full user-agent string
+  - Browser language(s) and browser timezone
+  - Screen size, viewport size, pixel ratio, colour depth
+  - Approximate device memory, CPU core count, touch support
+  - Network connection type and downlink speed
+  - Cookie-enabled flag and Do-Not-Track setting
+  - The referring URL, and the page/title you landed on
+  - A timestamp
+
+This data is collected to understand who visits the site. It is not sold or
+shared. One entry is recorded per browser session.
+
+Third party
+-----------
+Geolocation is provided by ipapi.co; their handling of your IP is governed by
+their own policy (https://ipapi.co/privacy/).
+
+Contact / requests
+------------------
+To ask what is stored about you, or to have it removed:
+  pranay.mokida@protonmail.com
+
+Last updated: 2026-06-09

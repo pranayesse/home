@@ -636,6 +636,77 @@ window.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => recon.classList.add('on'));
     }
 
+    /* Recon logging — OFF until you paste your deployed endpoint URL below.
+       See recon-logger/README.md for the Google Apps Script + Sheet setup.
+       Logging visitor IPs is personal data; keep the privacy note in the
+       footer (privacy.txt) accurate if you enable this. */
+    const RECON_LOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxmb7_JlIxvw-FDDItAr9qobGNaxbKuseIxYVG4CG_Huz4ag_9rVRQ33U1e0488EBld5g/exec';
+
+    function logRecon(geo) {
+      if (!RECON_LOG_ENDPOINT) return;
+      if (sessionStorage.getItem('pm-recon-logged')) return; // once per session
+      try {
+        const g = geo || {};
+        const nav = navigator;
+        const scr = window.screen || {};
+        const conn = nav.connection || nav.mozConnection || nav.webkitConnection || {};
+        const payload = {
+          ts: new Date().toISOString(),
+          // --- network / geo (ipapi.co) ---
+          ip: g.ip || null,
+          ip_version: g.version || null,
+          city: g.city || null,
+          region: g.region || null,
+          region_code: g.region_code || null,
+          country: g.country_name || null,
+          country_code: g.country_code || null,
+          continent: g.continent_code || null,
+          in_eu: typeof g.in_eu === 'boolean' ? g.in_eu : null,
+          postal: g.postal || null,
+          latitude: g.latitude || null,
+          longitude: g.longitude || null,
+          timezone: g.timezone || null,
+          utc_offset: g.utc_offset || null,
+          calling_code: g.country_calling_code || null,
+          currency: g.currency || null,
+          asn: g.asn || null,
+          org: g.org || null,
+          // --- client / device ---
+          browser: browser,
+          os: os,
+          user_agent: ua,
+          language: nav.language || null,
+          languages: (nav.languages || []).join(',') || null,
+          platform: nav.platform || null,
+          tz_browser: (Intl.DateTimeFormat().resolvedOptions().timeZone) || null,
+          screen: (scr.width || '?') + 'x' + (scr.height || '?'),
+          viewport: window.innerWidth + 'x' + window.innerHeight,
+          dpr: window.devicePixelRatio || null,
+          color_depth: scr.colorDepth || null,
+          device_memory: (nav.deviceMemory != null ? nav.deviceMemory : null),
+          cpu_cores: (nav.hardwareConcurrency != null ? nav.hardwareConcurrency : null),
+          touch: ('ontouchstart' in window) || nav.maxTouchPoints > 0,
+          connection: conn.effectiveType || null,
+          downlink: (conn.downlink != null ? conn.downlink : null),
+          cookies_enabled: nav.cookieEnabled,
+          dnt: nav.doNotTrack || null,
+          // --- visit ---
+          referrer: document.referrer || null,
+          page: location.pathname,
+          page_url: location.href,
+          title: document.title
+        };
+        fetch(RECON_LOG_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(() => {});
+        sessionStorage.setItem('pm-recon-logged', '1');
+      } catch (_) { /* never let logging break the page */ }
+    }
+
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 4000);
     fetch('https://ipapi.co/json/', { signal: ctrl.signal })
@@ -644,7 +715,8 @@ window.addEventListener('DOMContentLoaded', () => {
         clearTimeout(timer);
         const loc = geo && geo.city && geo.country_code ? geo.city + ', ' + geo.country_code : null;
         renderRecon(loc);
+        logRecon(geo);
       })
-      .catch(() => { clearTimeout(timer); renderRecon(null); });
+      .catch(() => { clearTimeout(timer); renderRecon(null); logRecon(null); });
   }
 });
