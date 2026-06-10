@@ -1,0 +1,5 @@
+Pulling a few rows for the offsite spreadsheet, will tidy later:
+
+EMP-746218, gho@fabcorp.example, assigned project IRONWOOD
+EMP-852460, mnair@fabcorp.example, assigned project SANDPIPER
+wafer lots in scope this week: LOT-81A1-0021, LOT-77F2-0321

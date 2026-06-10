@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fabguard"
+version = "0.1.0"
+description = "AI-aware DLP engine for semiconductor IP: EDM/IDM fingerprinting, ML classification, GenAI guardrails, behavioral exfil analytics"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Pranay Mokida" }]
+dependencies = []
+
+[project.scripts]
+fabguard = "fabguard.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["fabguard*"]

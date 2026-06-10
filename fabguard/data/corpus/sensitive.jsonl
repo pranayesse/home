@@ -1,0 +1,12 @@
+{"text": "The 1-gamma node yield ramp is behind plan; defect density on the bitline contact layer requires a revised litho recipe and tighter overlay budget before tape-out."}
+{"text": "Attached is the DDR5 PHY RTL drop. The always block for the write-leveling FSM changed; rerun the DRC deck and update the OPC deck before the next mask set release."}
+{"text": "Technology roadmap update: HBM4 controller tape-out targets Q3 '26, with EUV dose tuning experiments scheduled on the pilot line through the qual ramp."}
+{"text": "SRAM bitcell area shrink for the next die shrink depends on the new design rule waiver; process window analysis shows marginal sense amplifier timing at low voltage."}
+{"text": "Do not distribute: the photomask order for the IRONWOOD reticle set includes the revised wordline pitch; fab utilization on the EUV scanners is the bottleneck."}
+{"text": "module ddr_phy_top (input clk, input rst_n, output reg ready); always @(posedge clk) begin ready <= ~rst_n; end endmodule"}
+{"text": "Yield ramp review: row hammer mitigation logic added to the bank group arbiter increased refresh interval pressure; see the updated netlist in ddr5_ctrl.v and layout in top_block.gds."}
+{"text": "Internal only — VOLTA-9 product roadmap: sampling in Q1, qualification ramp mid-year, volume production contingent on wafer yield crossing the 80 percent process window target."}
+{"text": "The TSV stack qualification for the 3D NAND firmware drop is gated on the cache controller RTL freeze; clone git/nand-fw and run the regression testbench before code review."}
+{"text": "Litho recipe v14 raises EUV dose by 4 percent to recover the overlay budget on the storage node mask; defect density projections updated in the tape-out readiness deck."}
+{"text": "entity sense_amp is port (bl, blb : in std_logic; q : out std_logic); end entity; -- timing margin on the sense amplifier strobe is the critical path for the bitline read"}
+{"text": "KESTREL-X design review notes: the SRAM compiler output fails the DRC deck on metal2 spacing; design rule exception filed, mask set hold until the reticle is re-spun."}

@@ -1,0 +1,9 @@
+employee_id,email,project_codename,wafer_lot_id
+EMP-118842,akumar@fabcorp.example,VOLTA-9,LOT-77F2-0319
+EMP-220741,bchen@fabcorp.example,KESTREL-X,LOT-77F2-0320
+EMP-309177,cdiaz@fabcorp.example,IRONWOOD,LOT-81A1-0021
+EMP-415520,dpatel@fabcorp.example,VOLTA-9,LOT-81A1-0022
+EMP-528833,efranklin@fabcorp.example,SANDPIPER,LOT-90C7-1104
+EMP-633901,fgarcia@fabcorp.example,KESTREL-X,LOT-90C7-1105
+EMP-746218,gho@fabcorp.example,IRONWOOD,LOT-90C7-1106
+EMP-852460,mnair@fabcorp.example,SANDPIPER,LOT-77F2-0321

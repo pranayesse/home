@@ -1,0 +1,7 @@
+LITHO RECIPE v14 — IRONWOOD storage node mask — NDA REQUIRED
+
+EUV dose raised 4% over v13 to recover the overlay budget on the bitline
+contact layer. Focus offset table updated for the pilot line scanners.
+Defect density projection: 0.021/cm2 at the revised process window.
+Reticle: IRONWOOD-SN-R3. OPC deck regenerated against DRC deck 9.2.
+Apply only to wafer lots LOT-81A1-0021 and LOT-81A1-0022 during qual.

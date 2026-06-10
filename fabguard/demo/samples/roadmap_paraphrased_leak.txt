@@ -1,0 +1,10 @@
+Quick summary for my notes (rewording the deck so it's easier to share):
+
+The 1-gamma node goes into risk production around Q2 2026, but the yield
+ramp depends on the revised litho recipe v14 and the tighter overlay
+budget on the storage node mask. The VOLTA-9 compute DRAM spin is
+expected to tape-out in Q3 '26 with the qualification ramp through Q4.
+Volume production lands early 2027 if wafer yield clears the 80% process
+window target. On the HBM side, the HBM4 controller RTL freeze happens
+in July and the TSV stack qualification follows the cache controller
+regression work.

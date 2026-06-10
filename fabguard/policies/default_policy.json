@@ -1,0 +1,7 @@
+{
+  "name": "semiconductor-ip-protection-v1",
+  "thresholds": {"COACH": 25, "REDACT": 45, "BLOCK": 70},
+  "redact_categories": ["secrets", "pii"],
+  "classifier_min_confidence": 0.75,
+  "idm_thresholds": {"partial": 0.25, "strong": 0.6}
+}
