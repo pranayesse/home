@@ -331,7 +331,7 @@ window.addEventListener('DOMContentLoaded', () => {
   /* ---------- Contact Form ---------- */
   const form = document.getElementById('contact-form');
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const btn = form.querySelector('.form-submit');
       const name    = document.getElementById('f-name').value.trim();
@@ -339,38 +339,16 @@ window.addEventListener('DOMContentLoaded', () => {
       const subject = document.getElementById('f-subject').value.trim() || 'Message from portfolio';
       const message = document.getElementById('f-message').value.trim();
 
-      btn.textContent = '⬤ Sending...';
-      btn.disabled = true;
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\n${message}`
+      );
+      window.location.href =
+        `mailto:pranay.mokida@protonmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
 
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, subject, message })
-        });
-
-        if (res.ok) {
-          btn.textContent = '✓ Message Sent';
-          btn.style.background = 'var(--accent2)';
-          form.reset();
-        } else {
-          throw new Error('server error');
-        }
-      } catch {
-        /* Fallback: open mailto so the message is never lost */
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\n${message}`
-        );
-        window.location.href =
-          `mailto:pranay.mokida@protonmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-        btn.textContent = '↗ Opening email client...';
-      } finally {
-        btn.disabled = false;
-        setTimeout(() => {
-          btn.textContent = '⇒ send_message.sh';
-          btn.style.background = '';
-        }, 4000);
-      }
+      btn.textContent = '↗ Opening email client...';
+      setTimeout(() => {
+        btn.textContent = '⇒ send_message.sh';
+      }, 4000);
     });
   }
 
