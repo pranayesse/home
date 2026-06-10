@@ -914,6 +914,65 @@ nav:not(.footer-links) {
 
 .form-submit:hover { background: var(--accent2); transform: translateY(-1px); }
 
+.form-hint {
+  margin-top: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- Explore More (pre-footer CTA) ---------- */
+.explore-section { padding-top: 0; }
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.explore-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  color: inherit;
+  transition: all var(--transition);
+}
+
+.explore-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+
+.explore-icon { font-size: 1.8rem; }
+
+.explore-text { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.explore-title {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.explore-desc { color: var(--muted); font-size: 0.9rem; }
+
+.explore-arrow {
+  margin-left: auto;
+  font-size: 1.4rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.explore-card:hover .explore-arrow { transform: translateX(4px); }
+
 /* ---------- Footer ---------- */
 footer {
   background: var(--surface);
@@ -1620,6 +1679,7 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 2rem; }
   .about-img-wrap { max-width: 260px; margin: 0 auto; }
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .explore-grid { grid-template-columns: 1fr; }
   .hero-stats { gap: 1.5rem; }
   .skills-grid { grid-template-columns: 1fr; }
   .skills-categories { grid-template-columns: 1fr; }
