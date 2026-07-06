@@ -500,56 +500,6 @@ window.addEventListener('DOMContentLoaded', () => {
     return Math.floor(days / 365) + 'y ago';
   }
 
-  /* ---------- Live GitHub Activity ---------- */
-  const ghLive = document.getElementById('gh-live');
-  const ghRepos = document.getElementById('gh-repos');
-  if (ghLive && ghRepos) {
-    cachedJSON('pm-gh-repos', 'https://api.github.com/users/pranayesse/repos?sort=pushed&per_page=12')
-      .then(repos => {
-        const top = repos.filter(r => !r.fork).slice(0, 4);
-        if (!top.length) return;
-        top.forEach(r => {
-          const a = document.createElement('a');
-          a.className = 'gh-repo';
-          a.href = r.html_url;
-          a.target = '_blank';
-          a.rel = 'noopener';
-
-          const name = document.createElement('div');
-          name.className = 'gh-repo-name';
-          name.textContent = r.name;
-
-          const desc = document.createElement('div');
-          desc.className = 'gh-repo-desc';
-          desc.textContent = r.description || 'No description — code speaks for itself.';
-
-          const meta = document.createElement('div');
-          meta.className = 'gh-repo-meta';
-          if (r.language) {
-            const lang = document.createElement('span');
-            const dot = document.createElement('span');
-            dot.className = 'lang-dot';
-            lang.appendChild(dot);
-            lang.appendChild(document.createTextNode(r.language));
-            meta.appendChild(lang);
-          }
-          if (r.stargazers_count > 0) {
-            const stars = document.createElement('span');
-            stars.textContent = '★ ' + r.stargazers_count;
-            meta.appendChild(stars);
-          }
-          const pushed = document.createElement('span');
-          pushed.textContent = 'pushed ' + relTime(r.pushed_at);
-          meta.appendChild(pushed);
-
-          a.append(name, desc, meta);
-          ghRepos.appendChild(a);
-        });
-        ghLive.hidden = false;
-      })
-      .catch(() => { /* API unreachable or rate-limited — keep section hidden */ });
-  }
-
   /* ---------- Last Updated Badge ---------- */
   const lastUpdated = document.getElementById('last-updated');
   if (lastUpdated) {
