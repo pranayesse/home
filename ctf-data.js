@@ -42,6 +42,9 @@ var CTF_DATA = {
 
   completions: [
     /* THM_AUTO_START */
+    {"platform":"TryHackMe","name":"Introductory Networking","category":"Networking","difficulty":"info","date":"","url":"https://tryhackme.com/room/introtonetworking","code":"introtonetworking"},
+    {"platform":"TryHackMe","name":"DNS in Detail","category":"Networking","difficulty":"info","date":"","url":"https://tryhackme.com/room/dnsindetail","code":"dnsindetail"},
+    {"platform":"TryHackMe","name":"Searchlight - IMINT","category":"OSINT","difficulty":"easy","date":"","url":"https://tryhackme.com/room/searchlightosint","code":"searchlightosint"},
     /* THM_AUTO_END */
   ]
 
