@@ -1462,6 +1462,8 @@ footer {
 .ctf-diff--easy   { color: var(--accent); }
 .ctf-diff--medium { color: #f59e0b; }
 .ctf-diff--hard   { color: #ef4444; }
+.ctf-diff--info   { color: var(--muted); }
+.ctf-diff--insane { color: #b91c1c; }
 
 /* ---------- Blog domain & type badges ---------- */
 .blog-filter-section {
