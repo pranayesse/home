@@ -35,19 +35,53 @@ const UA =
 
 function log(...a) { console.log('[thm-sync]', ...a); }
 
-async function getJSON(url) {
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Relay proxies fetch server-side from their own IP. TryHackMe rate-limits
+// (HTTP 429) shared GitHub-runner IPs, so a direct call often fails; these
+// give the request a different origin to try. Best-effort and order-sensitive.
+const PROXIES = [
+  (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+  (u) => 'https://corsproxy.io/?url=' + encodeURIComponent(u),
+  (u) => 'https://thingproxy.freeboard.io/fetch/' + u,
+];
+
+async function rawFetch(url) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 20000);
+  const t = setTimeout(() => ctrl.abort(), 25000);
   try {
     const r = await fetch(url, {
       headers: { 'Accept': 'application/json', 'User-Agent': UA },
       signal: ctrl.signal,
     });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return await r.json();
+    const text = await r.text();
+    return { ok: r.ok, status: r.status, text };
   } finally {
     clearTimeout(t);
   }
+}
+
+// Fetch a TryHackMe URL as JSON: try direct (with a couple of backoff retries
+// on 429/5xx), then fall back through the relay proxies. Throws only if every
+// route fails.
+async function getJSON(thmUrl) {
+  const attempts = [];
+  for (let i = 0; i < 3; i++) attempts.push({ url: thmUrl, label: 'direct', wait: i ? 1500 * i : 0 });
+  for (const mk of PROXIES) attempts.push({ url: mk(thmUrl), label: 'proxy', wait: 0 });
+
+  let last = 'no attempts';
+  for (const a of attempts) {
+    if (a.wait) await sleep(a.wait);
+    try {
+      const res = await rawFetch(a.url);
+      if (!res.ok) { last = a.label + ' HTTP ' + res.status; continue; }
+      try { return JSON.parse(res.text); }
+      catch { last = a.label + ' non-JSON response'; continue; }
+    } catch (e) {
+      last = a.label + ' ' + (e.name === 'AbortError' ? 'timeout' : e.message);
+    }
+  }
+  throw new Error(last);
 }
 
 function pick(obj, keys) {
