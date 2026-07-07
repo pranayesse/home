@@ -1,0 +1,57 @@
+name: Sync TryHackMe completed rooms
+
+on:
+  schedule:
+    # Every 6 hours. GitHub may delay scheduled runs under load.
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+# Allow committing the refreshed data and dispatching the Pages deploy.
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: thm-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch completed rooms
+        env:
+          # Optional override — set as a repo variable if username resolution fails.
+          THM_USER_HASH: ${{ vars.THM_USER_HASH }}
+        run: node scripts/fetch-thm-rooms.mjs
+
+      - name: Commit changes if any
+        id: commit
+        run: |
+          if git diff --quiet -- ctf-data.js; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to ctf-data.js."
+          else
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add ctf-data.js
+            git commit -m "chore: sync TryHackMe completed rooms"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger Pages deploy
+        # A push made with GITHUB_TOKEN does not trigger static.yml's on:push,
+        # so kick the deploy explicitly when data actually changed.
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run static.yml --ref main
