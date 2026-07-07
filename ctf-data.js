@@ -28,9 +28,9 @@ var CTF_DATA = {
   platforms: [
     {
       name:       'TryHackMe',
-      handle:     'pranaymokida',
-      profileUrl: 'https://tryhackme.com/p/pranaymokida',
-      badgeUrl:   'https://tryhackme-badges.s3.amazonaws.com/pranaymokida.png',
+      handle:     'pranayesse',
+      profileUrl: 'https://tryhackme.com/p/pranayesse',
+      badgeUrl:   'https://tryhackme-badges.s3.amazonaws.com/pranayesse.png',
     }
   ],
 
