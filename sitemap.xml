@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://pranaymokida.xyz/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,7 +12,7 @@
   <!-- Blog listing -->
   <url>
     <loc>https://pranaymokida.xyz/blog.html</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -52,7 +52,7 @@
   <!-- Other pages -->
   <url>
     <loc>https://pranaymokida.xyz/links.html</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
