@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Unpublished post scaffold — full of [EDIT: ...] placeholders, not real content
+Disallow: /posts/_template.html
+
 Sitemap: https://pranaymokida.xyz/sitemap.xml
