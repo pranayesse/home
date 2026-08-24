@@ -7,6 +7,7 @@ Expires: 2027-06-09T00:00:00.000Z
 Encryption: https://pranaymokida.xyz/pgp-key.txt
 Preferred-Languages: en
 Canonical: https://pranaymokida.xyz/.well-known/security.txt
+Canonical: https://pranaymokida.xyz/security.txt
 
 # Found something? I'd genuinely love to hear about it.
 # Static site, no backend — but reports about anything on this
