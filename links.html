@@ -202,6 +202,14 @@
       gap: 0.75rem;
     }
 
+    a.currently-strip {
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s;
+    }
+
+    a.currently-strip:hover { border-color: var(--accent); }
+
     .currently-dot {
       width: 8px; height: 8px;
       border-radius: 50%;
@@ -411,13 +419,13 @@
           </div>
         </div>
         <div class="ls-body">
-          <div class="currently-strip">
+          <a href="https://steamcommunity.com/id/Pranayesse/" target="_blank" rel="noopener" class="currently-strip">
             <div class="currently-dot"></div>
             <div>
               <div class="currently-label">Currently Playing</div>
               <div class="currently-val">See live activity →</div>
             </div>
-          </div>
+          </a>
           <p class="ls-desc">
             Gaming is how I decompress. I keep a full log of everything I've played — completions, achievements, time spent. It's the obsessive tracker in me. Also doubles as a great argument for why gaming is time well spent.
           </p>
